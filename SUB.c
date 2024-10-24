@@ -29,7 +29,7 @@ void sub_reg_assm(void) {
 }
 
 void sub_reg_bin(void) {
-	if (checkBits(31, "000000") != 0 && checkBits(5, "100010") != 0) {
+	if (checkBits(31, "000000") != 0 || checkBits(5, "100010") != 0) {
 		state = WRONG_COMMAND;
 		return;
 	}
