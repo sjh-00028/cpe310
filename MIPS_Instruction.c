@@ -1,4 +1,4 @@
-#include "MIPS_Instruction.h"
+#include "MIPS_instruction.h"
 
 Assm_Instruct assm_instruct;
 uint32_t instruct;
@@ -21,8 +21,8 @@ void (*assembly_instructs[])(void) = {
 	bne_immd_assm,
 	slti_immd_assm,
 	sw_immd_assm,
-	
-	
+
+
 
 	// register functions
 	add_reg_assm,
@@ -34,8 +34,8 @@ void (*assembly_instructs[])(void) = {
 	and_reg_assm,
 	or_reg_assm,
 	slt_reg_assm,
-	
-	
+
+
 
 	end_list
 };
@@ -407,7 +407,7 @@ void parseAssem(char* line) {
 	else if (startswith(line, "SUB") == 1) { setOp("SUB"); line += 3;}
 	else if (startswith(line, "SW") == 1) { setOp("SW"); line += 2; }
 	else { state = UNRECOGNIZED_COMMAND; return; }
-	
+
 
 	if (*line != ' ') {
 		state = MISSING_SPACE;
@@ -488,7 +488,7 @@ char* readParam(char* line, struct Param* param) {
 	if (toupper(*line) == '(' ) {
 		line++;
 	}
-	
+
 
 	// eat any whitespace
 	while (*line == ' ') { line++; }
@@ -497,7 +497,7 @@ char* readParam(char* line, struct Param* param) {
 		state = MISSING_PARAM;
 		return NULL;
 	}
-	
+
 
 	// check parameter type and save value
 	if (toupper(*line) == '$') {
@@ -515,13 +515,8 @@ char* readParam(char* line, struct Param* param) {
 	}
 	else if (toupper(*line) == '#') {
 		line++;
-		char imm[5] = { 0 };
-		int i = 0;
-		while (isdigit(*line)) {
-			imm[i++] = *line++;
-		}
 		param->type = IMMEDIATE;
-		param->value = atoi(imm);
+		line = immd2num(line, &param->value);
 	}
 	else {
 		state = INVALID_PARAM;
@@ -556,7 +551,7 @@ char* readParam(char* line, struct Param* param) {
 uint32_t reg2num(char* reg) {
 	// Convert register name to the appropriate register number
 	uint32_t num = 32;
-	if (strcmp(reg, "zero") == 0) { num = 0; }  // $zero is register 0 
+	if (strcmp(reg, "zero") == 0) { num = 0; }  // $zero is register 0
 	else if (strcmp(reg, "v0") == 0) { num = 2; }  // $v0 is register 2
 	else if (strcmp(reg, "v1") == 0) { num = 3; }  // $v1 is register 3
 	else if (strcmp(reg, "a0") == 0) { num = 4; }  // $a0 is register 4
@@ -575,9 +570,9 @@ uint32_t reg2num(char* reg) {
 	else if (strcmp(reg, "s1") == 0) { num = 17; }  // $s1 is register 17
 	else if (strcmp(reg, "s2") == 0) { num = 18; }  // $s2 is register 18
 	else if (strcmp(reg, "s3") == 0) { num = 19; }  // $s3 is register 19
-	else if (strcmp(reg, "s4") == 0) { num = 20; }  // $s4 is register 20 
+	else if (strcmp(reg, "s4") == 0) { num = 20; }  // $s4 is register 20
 	else if (strcmp(reg, "s5") == 0) { num = 21; }  // $s5 is register 21
-	else if (strcmp(reg, "s6") == 0) { num = 22; }  // $s6 is register 22 
+	else if (strcmp(reg, "s6") == 0) { num = 22; }  // $s6 is register 22
 	else if (strcmp(reg, "s7") == 0) { num = 23; }  // $s7 is register 23
 	else if (strcmp(reg, "t8") == 0) { num = 24; }  // $t8 is register 24
 	else if (strcmp(reg, "t9") == 0) { num = 25; }  // $t9 is register 25

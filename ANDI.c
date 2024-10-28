@@ -63,7 +63,6 @@ void andi_immd_assm(void) {
 	// Set the opcode
 	setBits_str(31, "001100");
 
-
 	// set Rt
 	setBits_num(20, PARAM1.value, 5);
 
