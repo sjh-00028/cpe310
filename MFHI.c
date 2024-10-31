@@ -30,7 +30,7 @@ void mfhi_reg_assm(void) {
 }
 
 void mfhi_reg_bin(void) {
-	if (checkBits(31, "000000") != 0 || checkBits(5, "010001") != 0) {
+	if (checkBits(31, "000000") != 0 || checkBits(5, "010000") != 0) {
 		state = WRONG_COMMAND;
 		return;
 	}
