@@ -1,5 +1,6 @@
 #include "Instruction.h"
 
+// Sierra Jackson
 void mfhi_reg_assm(void) {
 	if (strcmp(OP_CODE, "MFHI") != 0) {
 		state = WRONG_COMMAND;

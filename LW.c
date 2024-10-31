@@ -1,6 +1,6 @@
 #include "Instruction.h"
 
-// working without offsets
+// Sierra Jackson
 void lw_immd_assm(void) {
 	if (strcmp(OP_CODE, "LW") != 0) {
 		state = WRONG_COMMAND;
@@ -12,9 +12,13 @@ void lw_immd_assm(void) {
 		return;
 	}
 
-	if (PARAM2.type != REGISTER) {
-		state = MISSING_REG;
+	if (PARAM2.type != IMMEDIATE) {
+		state = INVALID_PARAM;
 		return;
+	}
+
+	if (PARAM3.type != REGISTER) {
+		state = MISSING_REG;
 	}
 
 	if (PARAM1.value > 31) {
@@ -22,8 +26,11 @@ void lw_immd_assm(void) {
 		return;
 	}
 
-	// Rs should be 31 or less
-	if (PARAM2.value > 31) {
+	if (PARAM2.value > 0xFFFF) {
+		state = INVALID_IMMED;
+	}
+
+	if (PARAM3.value > 31) {
 		state = INVALID_REG;
 		return;
 	}
@@ -34,8 +41,11 @@ void lw_immd_assm(void) {
 	// set Rs
 	setBits_num(25, PARAM1.value, 5);
 
+	// offset
+	setBits_num(15, PARAM2.value, 16);
+
 	// set Rt
-	setBits_num(20, PARAM2.value, 5);
+	setBits_num(20, PARAM3.value, 5);
 
 	// tell the system the encoding is done
 	state = COMPLETE_ENCODE;
@@ -49,11 +59,13 @@ void lw_immd_bin(void) {
 
 	uint32_t Rs = getBits(25, 5);
 	uint32_t Rt = getBits(20, 5);
+	uint32_t offset = getBits(15, 16);
 
 	setOp("LW");
 
 	setParam(1, REGISTER, Rs); //first source register operand
-	setParam(2, REGISTER, Rt); //second source register operand
+	setParam(2, IMMEDIATE, offset);
+	setParam(3, REGISTER, Rt); //second source register operand
 
 	state = COMPLETE_DECODE;
 
