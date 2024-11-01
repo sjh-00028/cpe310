@@ -1,5 +1,6 @@
 #include "Instruction.h"
 
+// Sierra Jackson
 void div_reg_assm(void) {
 	if (strcmp(OP_CODE, "DIV") != 0) {
 		state = WRONG_COMMAND;
