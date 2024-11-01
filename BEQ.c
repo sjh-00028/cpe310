@@ -1,5 +1,5 @@
 #include "Instruction.h"
-
+// joe hauser
 void beq_immd_assm(void) {
 	if (strcmp(OP_CODE, "BEQ") != 0) {
 		state = WRONG_COMMAND;

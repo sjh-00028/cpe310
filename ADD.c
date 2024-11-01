@@ -1,5 +1,5 @@
 #include "Instruction.h"
-
+// Joe Hauser
 void add_reg_assm(void) {
 	if (strcmp(OP_CODE, "ADD") != 0) {
 		state = WRONG_COMMAND;

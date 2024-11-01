@@ -1,6 +1,6 @@
 #include "Instruction.h"
 
-// working without offsets
+// joe hauser
 void sw_immd_assm(void) {
 	if (strcmp(OP_CODE, "SW") != 0) {
 		state = WRONG_COMMAND;

@@ -1,5 +1,5 @@
 #include "Instruction.h"
-
+// Joe Hauser
 void addi_immd_assm(void) {
 	if (strcmp(OP_CODE, "ADDI") != 0) {
 		state = WRONG_COMMAND;

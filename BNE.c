@@ -1,5 +1,5 @@
 #include "Instruction.h"
-
+// joe hauser
 void bne_immd_assm(void) {
 	if (strcmp(OP_CODE, "BNE") != 0) {
 		state = WRONG_COMMAND;
