@@ -1,6 +1,8 @@
 #include "Instruction.h"
 
-// Sierra Jackson
+/*
+ * Author: Sierra Jackson
+ */
 void lui_immd_assm(void) {
 	if (strcmp(OP_CODE, "LUI") != 0) {
 		state = WRONG_COMMAND;

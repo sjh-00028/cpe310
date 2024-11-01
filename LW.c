@@ -1,6 +1,8 @@
 #include "Instruction.h"
 
-// Sierra Jackson
+/*
+ * Author: Sierra Jackson
+ */
 void lw_immd_assm(void) {
 	if (strcmp(OP_CODE, "LW") != 0) {
 		state = WRONG_COMMAND;

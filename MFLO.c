@@ -1,6 +1,8 @@
 #include "Instruction.h"
 
-// Sierra Jackson
+/*
+ * Author: Sierra Jackson
+ */
 void mflo_reg_assm(void) {
 	if (strcmp(OP_CODE, "MFLO") != 0) {
 		state = WRONG_COMMAND;

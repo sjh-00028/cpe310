@@ -1,6 +1,8 @@
 #include "Instruction.h"
 
-// Sierra Jackson
+/*
+ * Author: Sierra Jackson
+ */
 void mfhi_reg_assm(void) {
 	if (strcmp(OP_CODE, "MFHI") != 0) {
 		state = WRONG_COMMAND;
