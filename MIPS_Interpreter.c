@@ -35,6 +35,24 @@ int main(void) {
 		else if (strcmp(buffer, "test") == 0) {
 			test();
 		}
+		else if (strcmp(buffer, "4") == 0) {
+			printf("finding error\n");
+			memset(buffer, '\0', BUFF_SIZE);
+			gets(buffer, BUFF_SIZE);
+			for (int j = 0; j < 7; j++) {
+				char bufferToFlip[BUFF_SIZE] = {0};
+				strncpy(bufferToFlip, buffer, BUFF_SIZE);
+				if (bufferToFlip[j] == '0') {
+					bufferToFlip[j] = '1';
+				}
+				else {
+					bufferToFlip[j] = '0';
+				}
+				parseBin(bufferToFlip);
+				decode();
+				printResult();
+			}
+		}
 	}
 	return 0;
 }
