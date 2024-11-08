@@ -36,10 +36,10 @@ int main(void) {
 			test();
 		}
 		else if (strcmp(buffer, "4") == 0) {
-			printf("finding error\n");
+			printf("finding error in opcode\n");
 			memset(buffer, '\0', BUFF_SIZE);
 			gets(buffer, BUFF_SIZE);
-			for (int j = 0; j < 7; j++) {
+			for (int j = 0; j < 6; j++) {
 				char bufferToFlip[BUFF_SIZE] = {0};
 				strncpy(bufferToFlip, buffer, BUFF_SIZE);
 				if (bufferToFlip[j] == '0') {
@@ -50,8 +50,35 @@ int main(void) {
 				}
 				parseBin(bufferToFlip);
 				decode();
+				char bufferToPrint[7] = { 0 };
+				strncpy(bufferToPrint, bufferToFlip, 6);
+				printf("possible binary: %s\n", bufferToPrint);
+				printf("possible assembly: ");
 				printResult();
 			}
+
+		} else if (strcmp(buffer, "5") == 0) {
+			printf("finding error in rd\n");
+			memset(buffer, '\0', BUFF_SIZE);
+			gets(buffer, BUFF_SIZE);
+			for (int j = 16; j < 21; j++) {
+				char bufferToFlip[BUFF_SIZE] = { 0 };
+				strncpy(bufferToFlip, buffer, BUFF_SIZE);
+				if (bufferToFlip[j] == '0') {
+					bufferToFlip[j] = '1';
+				}
+				else {
+					bufferToFlip[j] = '0';
+				}
+				parseBin(bufferToFlip);
+				decode();
+				char bufferToPrint[6] = { 0 };
+				strncpy(bufferToPrint, bufferToFlip + 16, 5);
+				printf("possible binary: %s\n", bufferToPrint);
+				printf("possible assembly: ");
+				printResult();
+			}
+
 		}
 	}
 	return 0;
